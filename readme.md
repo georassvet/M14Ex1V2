@@ -1,4 +1,4 @@
-<h1># Module 1.2 Exercise 2</h1>
+<h1># Module 1.4 Exercise 1</h1>
 
 <h2>## Задание</h2>
 
