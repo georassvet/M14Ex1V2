@@ -95,38 +95,4 @@ public class SkillRepository implements ISkillRepository {
         }
         return skills;
     }
-
-    public static void main(String[] args) {
-        SkillRepository skillRepository =new SkillRepository();
-        //add
-        skillRepository.add(new Skill("Java"));
-        skillRepository.add(new Skill("C#"));
-        skillRepository.add(new Skill("Html"));
-        skillRepository.add(new Skill("Html"));
-        //get all
-        for (Skill skill: skillRepository.getAll()
-             ) {
-            System.out.println(skill);
-        }
-        //get id=2
-        System.out.println("get id=2 -> "+skillRepository.get(2l));
-        // update
-        skillRepository.update(new Skill(2, "CSharp"));
-        //get all
-        for (Skill skill: skillRepository.getAll()
-                ) {
-            System.out.println(skill);
-        }
-        System.out.println("delete");
-        skillRepository.delete(4l);
-
-        for (Skill skill: skillRepository.getAll()
-                ) {
-            System.out.println(skill);
-        }
-
-
-        
-        
-    }
 }

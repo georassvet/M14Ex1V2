@@ -1,5 +1,1 @@
-1,Sergey Mokhov,28,1,4,3,5,2
-2,Pavel Durov,27,6,7,3,5
-3,Ruslan Bashirov,28,9,10,8,11
-4,Petr Ivanov,35,9,12,13,8
-5,Alexey Loy,20,14
+1,Sergey Mokhov,28,1,1

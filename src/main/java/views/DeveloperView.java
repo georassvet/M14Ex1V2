@@ -10,5 +10,15 @@ public class DeveloperView {
              ) {
             System.out.println(developer);
         }
+
+        Developer developer = new Developer("Sergey Mokhov",28,"Engeener",new String[]{"Java"});
+
+        developerController.addDeveloper(developer);
+
+        Developer getDeveloper1 = developerController.getDeveloper(1);
+        Developer getDeveloper100 = developerController.getDeveloper(100);
+        System.out.println(getDeveloper1);
+
+
     }
 }

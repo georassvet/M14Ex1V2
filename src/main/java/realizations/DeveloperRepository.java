@@ -1,6 +1,8 @@
 package main.java.realizations;
 
 import main.java.interfaces.IDeveloperRepository;
+import main.java.interfaces.ISkillRepository;
+import main.java.models.Account;
 import main.java.models.Developer;
 import main.java.models.Skill;
 
@@ -20,7 +22,10 @@ public class DeveloperRepository implements IDeveloperRepository {
          Collection<Developer> developers = getAll();
          developers.add(developer);
          saveAll(developers);
-    return developer;
+         // add account
+         AccountRepository.getAccountRepository().add(developer.getAccount());
+
+         return developer;
     }
 
     private void saveAll(Collection<Developer> developers){
@@ -81,12 +86,16 @@ public class DeveloperRepository implements IDeveloperRepository {
                 String name = lineParams[1];
                 int age = Integer.parseInt(lineParams[2]);
 
+                Account account = AccountRepository.getAccountRepository().get(Long.parseLong(lineParams[3]));
+
                 Set<Skill> skills = new HashSet<>();
-                for (int i = 3; i < lineParams.length ; i++) {
-                    skills.add(SkillRepository.getRepository().get(Long.parseLong(lineParams[i])));
+                ISkillRepository skillRepository = SkillRepository.getRepository();
+                for (int i = 4; i < lineParams.length ; i++) {
+
+                    skills.add(skillRepository.get(Long.parseLong(lineParams[i])));
                 }
 
-                developers.add(new Developer(id, name, age, skills));
+                developers.add(new Developer(id, name, age, account, skills));
             }
 
         }catch(IOException e){
@@ -97,10 +106,8 @@ public class DeveloperRepository implements IDeveloperRepository {
 
     public static void main(String[] args) {
         DeveloperRepository developerRepository = DeveloperRepository.getDeveloperRepository();
-        developerRepository.add(new Developer("Sergey Mokhov", 28, new String[]{"Java", "C#", "Html", "Css","Sql"}));
-        developerRepository.add(new Developer("Pavel Durov", 27, new String[]{"PHP", "SQL", "Html","Sql"}));
-        developerRepository.add(new Developer("Ruslan Bashirov", 28, new String[]{"Linux", "Windows", "Mikrotik", "Cisco"}));
-        developerRepository.add(new Developer("Petr Ivanov", 35, new String[]{"Linux", "Windows", "Google", "Photoshop"}));
-        developerRepository.add(new Developer("Alexey Loy", 20, new String[]{"1C"}));
+        developerRepository.add(new Developer("Sergey Mokhov", 28, "Engeener", new String[]{"Java", "C#", "Html", "Css","Sql"}));
+        developerRepository.add(new Developer("Pavel Durov", 32, "Businessman. Creator of Telegram.", new String[]{"PHP", "SQL", "Html","Sql"}));
+       // developerRepository.add(new Developer("Alexey Loy", 35,"Technical support", new String[]{"1C"}));
     }
 }

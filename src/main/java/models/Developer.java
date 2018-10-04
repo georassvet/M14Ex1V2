@@ -13,9 +13,10 @@ public class Developer {
     private String name;
     private int age;
 
+    private Account account;
     private Set<Skill> skills;
 
-    public Developer(String name, int age, String[] skills) {
+    public Developer(String name, int age, String description, String[] skills) {
         this.id = ++counter;
         this.name = name;
         this.age = age;
@@ -26,17 +27,19 @@ public class Developer {
              ) {
             this.skills.add(skillRepository.getSkillByName(s));
         }
+        this.account =new Account(id,description);
     }
 
-    public Developer(long id, String name, int age, Set<Skill> skills) {
+    public Developer(long id, String name, int age,Account account, Set<Skill> skills) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.skills = skills;
+        this.account =account;
     }
 
     public String toFileString(){
-        return id +"," + name + "," + age + skillsId();
+        return id +"," + name + "," + age+"," + account.getId() + skillsId();
     }
 
     @Override
@@ -45,6 +48,7 @@ public class Developer {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", account="+ account +
                 ", skills=" + skills +
                 '}';
     }
@@ -89,4 +93,11 @@ public class Developer {
         this.skills = skills;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }
