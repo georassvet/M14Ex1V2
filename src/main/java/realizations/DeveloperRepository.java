@@ -103,11 +103,4 @@ public class DeveloperRepository implements IDeveloperRepository {
         }
         return developers;
     }
-
-    public static void main(String[] args) {
-        DeveloperRepository developerRepository = DeveloperRepository.getDeveloperRepository();
-        developerRepository.add(new Developer("Sergey Mokhov", 28, "Engeener", new String[]{"Java", "C#", "Html", "Css","Sql"}));
-        developerRepository.add(new Developer("Pavel Durov", 32, "Businessman. Creator of Telegram.", new String[]{"PHP", "SQL", "Html","Sql"}));
-       // developerRepository.add(new Developer("Alexey Loy", 35,"Technical support", new String[]{"1C"}));
-    }
 }
