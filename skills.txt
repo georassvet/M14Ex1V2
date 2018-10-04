@@ -1,3 +1,14 @@
 1,Java
-2,CSharp
+4,Css
+1,Google
+7,SQL
 3,Html
+5,Sql
+8,Linux
+11,Cisco
+3,1C
+6,PHP
+9,Windows
+2,Photoshop
+10,Mikrotik
+2,C#

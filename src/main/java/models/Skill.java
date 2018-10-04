@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Skill {
 
-    static long counter;
+    private static long counter;
 
     private long id;
     private String name;

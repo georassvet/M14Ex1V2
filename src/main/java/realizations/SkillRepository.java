@@ -14,7 +14,7 @@ public class SkillRepository implements ISkillRepository {
         return new SkillRepository();
     }
 
-    void saveAll(Collection<Skill> skills){
+   private void saveAll(Collection<Skill> skills){
         try(PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
             for (Skill skill : skills
                  ) {
@@ -24,20 +24,47 @@ public class SkillRepository implements ISkillRepository {
             System.out.println(e.getMessage());
         }
     }
-
     @Override
-    public void add(Skill skill) {
+    public Skill add(Skill skill) {
         Collection<Skill> skills = getAll();
+//        skills.add(tryAdd(skills,skill));
         skills.add(skill);
         saveAll(skills);
+        return skill;
     }
+    @Override
+    public Skill getSkillByName(String name){
+        Collection <Skill> skills = getAll();
+        for( Skill skill : skills){
+            if(skill.getName().equals(name))
+            return skill;
+        }
+        Skill addedSkill = new Skill(name);
+        add(addedSkill);
+        return addedSkill;
+    }
+//
+//    private Skill tryAdd(Collection<Skill> skills, Skill skill){
+//        for (Skill s: skills
+//             ) {
+//            if(s.equals(skill)){
+//                return s;
+//            }
+//            if(s.getId()==skill.getId()){
+//                skill.setId(skill.getId()+1);
+//                tryAdd(skills, skill);
+//                break;
+//            }
+//        }
+//        return skill;
+//    }
 
     @Override
     public void update(Skill updateSkill) {
         Collection<Skill> skills = getAll();
         for (Skill skill : skills
              ) {
-            if(skill.getId()==updateSkill.getId()){
+            if(skill.getId() == updateSkill.getId()){
                 skill.setName(updateSkill.getName());
             }
         }
@@ -72,9 +99,9 @@ public class SkillRepository implements ISkillRepository {
         try(BufferedReader bufferedReader =new BufferedReader(new FileReader(filename))){
             String line;
             while ((line=bufferedReader.readLine())!=null){
-                String[] lineArray = line.split(",");
-                long id = Long.parseLong(lineArray[0]);
-                String name = lineArray[1];
+                String[] lineParams = line.split(",");
+                long id = Long.parseLong(lineParams[0]);
+                String name = lineParams[1];
 
                 skills.add(new Skill(id,name));
             }
