@@ -27,7 +27,6 @@ public class SkillRepository implements ISkillRepository {
     @Override
     public Skill add(Skill skill) {
         Collection<Skill> skills = getAll();
-//        skills.add(tryAdd(skills,skill));
         skills.add(skill);
         saveAll(skills);
         return skill;
@@ -43,21 +42,6 @@ public class SkillRepository implements ISkillRepository {
         add(addedSkill);
         return addedSkill;
     }
-//
-//    private Skill tryAdd(Collection<Skill> skills, Skill skill){
-//        for (Skill s: skills
-//             ) {
-//            if(s.equals(skill)){
-//                return s;
-//            }
-//            if(s.getId()==skill.getId()){
-//                skill.setId(skill.getId()+1);
-//                tryAdd(skills, skill);
-//                break;
-//            }
-//        }
-//        return skill;
-//    }
 
     @Override
     public void update(Skill updateSkill) {

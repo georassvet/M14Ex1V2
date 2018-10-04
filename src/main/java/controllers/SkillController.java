@@ -3,6 +3,8 @@ package main.java.controllers;
 import main.java.models.Skill;
 import main.java.realizations.SkillRepository;
 
+import java.util.Collection;
+
 public class SkillController {
     private SkillRepository repository;
 
@@ -20,6 +22,14 @@ public class SkillController {
 
     public void updateSkill(Skill skill){
         repository.update(skill);
+    }
+
+    public Skill getSkill(long id){
+        return repository.get(id);
+    }
+
+    public Collection<Skill> getSkills(){
+        return repository.getAll();
     }
 
 
