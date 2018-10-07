@@ -1,0 +1,8 @@
+1,Java
+2,1C
+3,TCP
+4,IP
+5,Routing
+6,PHP
+7,SQL
+8,nginx
