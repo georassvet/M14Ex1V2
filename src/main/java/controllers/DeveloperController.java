@@ -1,11 +1,10 @@
 package main.java.controllers;
 
-import main.java.interfaces.IDeveloperRepository;
+import main.java.repository.IDeveloperRepository;
 import main.java.models.Developer;
-import main.java.realizations.DeveloperRepository;
+import main.java.repository.io.DeveloperRepository;
 
 import java.util.Collection;
-import java.util.List;
 
 public class DeveloperController {
     private IDeveloperRepository developerRepository;

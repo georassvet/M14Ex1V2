@@ -1,7 +1,6 @@
-package main.java.realizations;
+package main.java.repository.io;
 
-import main.java.interfaces.IDeveloperRepository;
-import main.java.interfaces.ISkillRepository;
+import main.java.repository.IDeveloperRepository;
 import main.java.models.Account;
 import main.java.models.Developer;
 import main.java.models.Skill;
@@ -10,10 +9,6 @@ import java.io.*;
 import java.util.*;
 
 public class DeveloperRepository implements IDeveloperRepository {
-
-    public static DeveloperRepository getDeveloperRepository(){
-        return new DeveloperRepository();
-    }
 
     static final String filename = "developer.txt";
 
@@ -64,13 +59,30 @@ public class DeveloperRepository implements IDeveloperRepository {
     }
 
     @Override
-    public Developer get(Long id) {
-        Collection<Developer> developers = getAll();
-        for (Developer developer : developers
-             ) {
-            if(developer.getId()==id){
-                return developer;
+    public Developer get(Long idParam) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(filename))){
+            String line;
+            while ((line=reader.readLine())!=null){
+                String[] lineParams = line.split(",");
+                Long id = Long.parseLong(lineParams[0]);
+                if(id.equals(idParam)){
+                    String name = lineParams[1];
+                    int age = Integer.parseInt(lineParams[2]);
+                    Account account = new AccountRepository().get(Long.parseLong(lineParams[3]));
+                    Set<Skill> skills = new HashSet<>();
+
+                    SkillRepository skillRepository = new SkillRepository();
+
+                    for (int i = 4; i < lineParams.length ; i++) {
+
+                        skills.add(skillRepository.get(Long.parseLong(lineParams[i])));
+                    }
+                    return new Developer(id, name, age, account, skills);
+
+                }
             }
+        }catch (IOException e){
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -86,10 +98,10 @@ public class DeveloperRepository implements IDeveloperRepository {
                 String name = lineParams[1];
                 int age = Integer.parseInt(lineParams[2]);
 
-                Account account = AccountRepository.getAccountRepository().get(Long.parseLong(lineParams[3]));
+                Account account = new AccountRepository().get(Long.parseLong(lineParams[3]));
 
                 Set<Skill> skills = new HashSet<>();
-                ISkillRepository skillRepository = SkillRepository.getRepository();
+                SkillRepository skillRepository = new SkillRepository();
                 for (int i = 4; i < lineParams.length ; i++) {
 
                     skills.add(skillRepository.get(Long.parseLong(lineParams[i])));

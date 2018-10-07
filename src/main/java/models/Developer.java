@@ -1,6 +1,6 @@
 package main.java.models;
 
-import main.java.realizations.SkillRepository;
+import main.java.repository.io.SkillRepository;
 
 import java.util.HashSet;
 import java.util.Set;

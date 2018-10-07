@@ -1,18 +1,13 @@
-package main.java.realizations;
+package main.java.repository.io;
 
-import main.java.interfaces.ISkillRepository;
+import main.java.repository.ISkillRepository;
 import main.java.models.Skill;
 
 import java.io.*;
 import java.util.*;
 
 public class SkillRepository implements ISkillRepository {
-
-    static final String filename = "skills.txt";
-
-    public static SkillRepository getRepository(){
-        return new SkillRepository();
-    }
+    final String filename = "skills.txt";
 
    private void saveAll(Collection<Skill> skills){
         try(PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
@@ -32,15 +27,21 @@ public class SkillRepository implements ISkillRepository {
         return skill;
     }
     @Override
-    public Skill getSkillByName(String name){
-        Collection <Skill> skills = getAll();
-        for( Skill skill : skills){
-            if(skill.getName().equals(name))
-            return skill;
+    public Skill getSkillByName(String nameParam){
+        try(BufferedReader reader = new BufferedReader(new FileReader(filename))){
+            String line;
+            while ((line=reader.readLine())!=null){
+                String[] lineParams = line.split(",");
+                String name = lineParams[1];
+                if(name.equals(nameParam)){
+                    Long id = Long.parseLong(lineParams[0]);
+                    return new Skill(id, name);
+                }
+            }
+        }catch (IOException e){
+            System.out.println(e.getMessage());
         }
-        Skill addedSkill = new Skill(name);
-        add(addedSkill);
-        return addedSkill;
+        return null;
     }
 
     @Override
@@ -66,13 +67,19 @@ public class SkillRepository implements ISkillRepository {
     }
 
     @Override
-    public Skill get(Long id) {
-        Collection<Skill> skills = getAll();
-        for (Skill skill: skills
-             ) {
-            if(skill.getId()==id){
-                return skill;
+    public Skill get(Long idParam) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(filename))){
+            String line;
+            while((line=reader.readLine())!=null){
+                String[] lineParams = line.split(",");
+                Long id = Long.parseLong(lineParams[0]);
+                if(id.equals(idParam)){
+                    String name = lineParams[1];
+                    return new Skill(id,name);
+                }
             }
+        }catch (IOException e){
+            System.out.println(e.getMessage());
         }
         return null;
     }

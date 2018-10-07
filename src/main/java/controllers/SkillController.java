@@ -1,7 +1,7 @@
 package main.java.controllers;
 
 import main.java.models.Skill;
-import main.java.realizations.SkillRepository;
+import main.java.repository.io.SkillRepository;
 
 import java.util.Collection;
 
