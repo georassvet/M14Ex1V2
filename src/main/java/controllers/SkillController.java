@@ -9,7 +9,7 @@ public class SkillController {
     private SkillRepository repository;
 
     public SkillController(){
-        repository=SkillRepository.getRepository();
+        repository= new SkillRepository();
     }
 
     public void addSkill(Skill skill){

@@ -16,7 +16,7 @@ public class DeveloperView {
         developerController.addDeveloper(developer);
 
         Developer getDeveloper1 = developerController.getDeveloper(1);
-        Developer getDeveloper100 = developerController.getDeveloper(100);
+       //Developer getDeveloper100 = developerController.getDeveloper(100);
         System.out.println(getDeveloper1);
 
 

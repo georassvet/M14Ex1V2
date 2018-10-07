@@ -1,7 +1,1 @@
 1,Java
-4,Css
-6,PHP
-7,SQL
-3,Html
-5,Sql
-2,C#

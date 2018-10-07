@@ -10,7 +10,7 @@ public class DeveloperController {
     private IDeveloperRepository developerRepository;
 
     public DeveloperController(){
-        developerRepository = DeveloperRepository.getDeveloperRepository();
+        developerRepository = new DeveloperRepository();
     }
     public void addDeveloper(Developer developer){
         developerRepository.add(developer);

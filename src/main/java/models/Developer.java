@@ -22,10 +22,15 @@ public class Developer {
         this.age = age;
         this.skills = new HashSet<>();
 
-        SkillRepository skillRepository =SkillRepository.getRepository();
+        SkillRepository skillRepository =new SkillRepository();
         for (String s : skills
              ) {
-            this.skills.add(skillRepository.getSkillByName(s));
+            Skill skill;
+            if((skill=skillRepository.getSkillByName(s))!=null){
+                this.skills.add(skill);
+            }else{
+                this.skills.add(skillRepository.add(new Skill(s)));
+            }
         }
         this.account =new Account(id,description);
     }
