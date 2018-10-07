@@ -13,7 +13,7 @@ public class AccountController {
         accountRepository = new AccountRepository();
     }
     public void addAccount(Account account){
-        accountRepository.add(account);
+        accountRepository.save(account);
     }
     public void removeAccount(long id){
         accountRepository.delete(id);
@@ -22,7 +22,7 @@ public class AccountController {
         accountRepository.update(account);
     }
     public Account getAccount(long id){
-        return accountRepository.get(id);
+        return accountRepository.getById(id);
     }
     public Collection<Account> getDevelopers(){
         return  accountRepository.getAll();

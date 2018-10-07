@@ -3,9 +3,9 @@ package main.java.repository;
 import java.util.Collection;
 
 public interface IRepository<T,K> {
-    T add(T t);
+    T save(T t);
     void update(T t);
     void delete(K id);
-    T get(K id);
+    T getById(K id);
     Collection<T> getAll();
 }

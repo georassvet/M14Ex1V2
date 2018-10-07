@@ -13,7 +13,7 @@ public class DeveloperController {
         developerRepository = new DeveloperRepository();
     }
     public void addDeveloper(Developer developer){
-        developerRepository.add(developer);
+        developerRepository.save(developer);
     }
     public void removeDeveloper(long id){
         developerRepository.delete(id);
@@ -22,7 +22,7 @@ public class DeveloperController {
         developerRepository.update(developer);
     }
     public Developer getDeveloper(long id){
-        return developerRepository.get(id);
+        return developerRepository.getById(id);
     }
     public Collection<Developer> getDevelopers(){
         return  developerRepository.getAll();

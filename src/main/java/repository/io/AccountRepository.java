@@ -10,11 +10,11 @@ import java.util.Scanner;
 
 public class AccountRepository implements IAccountRepository {
 
-    static final File file = new File("account.txt");
+    static final File file = new File("src\\main\\resources\\account.txt");
 
     @Override
-    public Account add(Account account) {
-        try(PrintWriter writer =new PrintWriter(new BufferedWriter(new FileWriter(file)))){
+    public Account save(Account account) {
+        try(PrintWriter writer =new PrintWriter(new BufferedWriter(new FileWriter(file,true)))){
             writer.println(account);
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -25,7 +25,7 @@ public class AccountRepository implements IAccountRepository {
     @Override
     public void update(Account account) {
         try(Scanner reader =new Scanner(file);
-            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)))){
+            PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file,true)))){
             while (reader.hasNext()) {
                 String fileToString = reader.useDelimiter("\\Z").next();
                 String[] lines = fileToString.split("\\r\\n");
@@ -48,7 +48,7 @@ public class AccountRepository implements IAccountRepository {
     @Override
     public void delete(Long idParam) {
         try(Scanner reader =new Scanner(file);
-        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)))){
+        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file,true)))){
             while (reader.hasNext()) {
                 String fileToString = reader.useDelimiter("\\Z").next();
                 String[] lines =fileToString.split("\\r\\n");
@@ -69,7 +69,7 @@ public class AccountRepository implements IAccountRepository {
     }
 
     @Override
-    public Account get(Long idParam) {
+    public Account getById(Long idParam) {
         try(BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
             while ((line = reader.readLine())!=null){

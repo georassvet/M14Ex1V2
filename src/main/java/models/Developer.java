@@ -29,7 +29,7 @@ public class Developer {
             if((skill=skillRepository.getSkillByName(s))!=null){
                 this.skills.add(skill);
             }else{
-                this.skills.add(skillRepository.add(new Skill(s)));
+                this.skills.add(skillRepository.save(new Skill(s)));
             }
         }
         this.account =new Account(id,description);

@@ -7,10 +7,10 @@ import java.io.*;
 import java.util.*;
 
 public class SkillRepository implements ISkillRepository {
-    File file = new File("skills.txt");
+    File file = new File("src\\main\\resources\\skills.txt");
 
     @Override
-    public Skill add(Skill skill) {
+    public Skill save(Skill skill) {
         try(PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(file,true)))){
             printWriter.println(skill);
         }catch (IOException e){
@@ -84,7 +84,7 @@ public class SkillRepository implements ISkillRepository {
     }
 
     @Override
-    public Skill get(Long idParam) {
+    public Skill getById(Long idParam) {
         try(BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
             while((line=reader.readLine())!=null){
@@ -120,32 +120,5 @@ public class SkillRepository implements ISkillRepository {
             System.out.println(e.getMessage());
         }
         return skills;
-    }
-
-    public static void main(String[] args) {
-        Skill skill =new Skill("Java");
-        Skill skill1 =new Skill("Sql");
-        Skill skill2 =new Skill("C#");
-        Skill skill3 =new Skill("Html");
-        SkillRepository skillRepository = new SkillRepository();
-
-        skillRepository.add(skill);
-        skillRepository.add(skill1);
-        skillRepository.add(skill2);
-        skillRepository.add(skill3);
-
-
-       Skill skillGetJava = skillRepository.getSkillByName("Java");
-       Skill skillGetSql = skillRepository.getSkillByName("Sql");
-
-       skillGetJava.setName("Java new");
-       skillRepository.update(skillGetJava);
-
-       Skill skillGetJavaNew = skillRepository.get(skillGetJava.getId());
-
-        System.out.println(skillGetJavaNew);
-
-
-
     }
 }

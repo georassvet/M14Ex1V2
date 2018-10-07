@@ -13,7 +13,7 @@ public class SkillController {
     }
 
     public void addSkill(Skill skill){
-        repository.add(skill);
+        repository.save(skill);
     }
 
     public void deleteSkill(long id){
@@ -25,7 +25,7 @@ public class SkillController {
     }
 
     public Skill getSkill(long id){
-        return repository.get(id);
+        return repository.getById(id);
     }
 
     public Collection<Skill> getSkills(){
